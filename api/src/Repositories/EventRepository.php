@@ -51,4 +51,40 @@ class EventRepository {
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function update($id, $organizer_id, $name, $start_time, $end_time, $description, $category) {
+        $query = "UPDATE events 
+                  SET name = :name, 
+                      start_time = :start_time, 
+                      end_time = :end_time, 
+                      description = :description, 
+                      category = :category 
+                  WHERE id = :id AND organizer_id = :organizer_id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':start_time', $start_time);
+        $stmt->bindParam(':end_time', $end_time);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':organizer_id', $organizer_id);
+        
+        $stmt->execute();
+        
+        // Return true if at least one row was affected (meaning event existed and belonged to organizer)
+        return $stmt->rowCount() > 0;
+    }
+
+    public function delete($id, $organizer_id) {
+        $query = "DELETE FROM events WHERE id = :id AND organizer_id = :organizer_id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':organizer_id', $organizer_id);
+        
+        $stmt->execute();
+        
+        return $stmt->rowCount() > 0;
+    }
 }

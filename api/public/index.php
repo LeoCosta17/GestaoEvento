@@ -130,6 +130,16 @@ switch (true) {
         $subscriptionController->unsubscribe($user, $matches[1]);
         break;
         
+    case (preg_match('/^\/events\/(\d+)$/', $uri, $matches) && $method === 'PUT'):
+        $user = authenticate();
+        $eventController->update($user, $matches[1]);
+        break;
+        
+    case (preg_match('/^\/events\/(\d+)$/', $uri, $matches) && $method === 'DELETE'):
+        $user = authenticate();
+        $eventController->delete($user, $matches[1]);
+        break;
+        
     default:
         Response::json(404, null, 'Route not found');
         break;

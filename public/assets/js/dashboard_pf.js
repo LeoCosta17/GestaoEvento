@@ -39,11 +39,11 @@ const DashboardPF = {
             grid.innerHTML += `
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">${event.name}</h3>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">${UI.escapeHTML(event.name)}</h3>
                         <div class="text-sm text-slate-600 mb-4 space-y-1">
                             <p><span class="font-medium text-indigo-600">Início:</span> ${UI.formatDate(event.start_time)}</p>
                         </div>
-                        <p class="text-slate-500 text-sm line-clamp-2 mb-4">${event.description || 'Sem descrição'}</p>
+                        <p class="text-slate-500 text-sm line-clamp-2 mb-4">${UI.escapeHTML(event.description) || 'Sem descrição'}</p>
                     </div>
                     ${buttonHtml}
                 </div>
@@ -79,7 +79,7 @@ const DashboardPF = {
                 grid.innerHTML += `
                     <div class="bg-indigo-600 rounded-2xl p-6 shadow-lg text-white flex flex-col justify-between">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">${event.name}</h3>
+                            <h3 class="text-xl font-bold mb-2">${UI.escapeHTML(event.name)}</h3>
                             <div class="text-indigo-100 text-sm mb-4 space-y-1">
                                 <p><span class="font-medium">Data:</span> ${UI.formatDate(event.start_time)}</p>
                             </div>

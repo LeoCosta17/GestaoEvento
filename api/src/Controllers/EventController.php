@@ -32,4 +32,21 @@ class EventController {
         $data = json_decode(file_get_contents("php://input"), true);
         $this->eventService->createEvent($user['id'], $data);
     }
+
+    public function update($user, $id) {
+        if ($user['type'] !== 'PJ') {
+            Response::json(403, null, 'Access denied. Only organizers can edit events.');
+        }
+
+        $data = json_decode(file_get_contents("php://input"), true);
+        $this->eventService->updateEvent($user['id'], $id, $data);
+    }
+
+    public function delete($user, $id) {
+        if ($user['type'] !== 'PJ') {
+            Response::json(403, null, 'Access denied. Only organizers can delete events.');
+        }
+
+        $this->eventService->deleteEvent($user['id'], $id);
+    }
 }
