@@ -15,11 +15,11 @@ class Database {
 
     public function __construct() {
         // Fallbacks para ambiente local, sobrescritos pelo Railway via Variáveis de Ambiente
-        $this->host = getenv('MYSQLHOST') ?: "localhost";
-        $this->db_name = getenv('MYSQLDATABASE') ?: "cadeventos";
+        $this->host = getenv('MYSQLHOST') ?: "acela.proxy.rlwy.net";
+        $this->db_name = getenv('MYSQLDATABASE') ?: "railway";
         $this->username = getenv('MYSQLUSER') ?: "root";
-        $this->password = getenv('MYSQLPASSWORD') !== false ? getenv('MYSQLPASSWORD') : "12345";
-        $this->port = getenv('MYSQLPORT') ?: "3307";
+        $this->password = getenv('MYSQLPASSWORD') !== false ? getenv('MYSQLPASSWORD') : "GnazCEPAYQqrRGqUhzaKZkBSgKOfeuiM";
+        $this->port = getenv('MYSQLPORT') ?: "16296";
     }
 
     public function getConnection() {
