@@ -6,12 +6,21 @@ use PDO;
 use PDOException;
 
 class Database {
-    private $host = "localhost";
-    private $db_name = "cadeventos";
-    private $username = "root";
-    private $password = "12345";
-    private $port = "3307";
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
+    private $port;
     public $conn;
+
+    public function __construct() {
+        // Fallbacks para ambiente local, sobrescritos pelo Railway via Variáveis de Ambiente
+        $this->host = getenv('MYSQLHOST') ?: "localhost";
+        $this->db_name = getenv('MYSQLDATABASE') ?: "cadeventos";
+        $this->username = getenv('MYSQLUSER') ?: "root";
+        $this->password = getenv('MYSQLPASSWORD') !== false ? getenv('MYSQLPASSWORD') : "12345";
+        $this->port = getenv('MYSQLPORT') ?: "3307";
+    }
 
     public function getConnection() {
         $this->conn = null;
